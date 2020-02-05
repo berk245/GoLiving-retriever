@@ -26,6 +26,18 @@ async function loadData() {
 
 app.get("/", (req, res) => {
   res.send(
-    "Welcome to the API page of GoLiving Thre is nothing to see here but you can make a request from your page with adding '/api' to the link to see the current applications:)"
+    "Welcome to the API of GoLiving Thre is nothing to see here but you can make a request from your page with adding '/retrieve' to the link to see the current applications:)"
   );
+});
+
+app.get("/retrieve", async function(req, res) {
+  const entries = await loadData();
+  res.status(200).send(await entries.find({}).toArray());
+});
+
+const port = process.env.PORT || 5000;
+//start the listening
+
+app.listen(port, () => {
+  console.log("We are live on port:" + port + " bitches!");
 });
