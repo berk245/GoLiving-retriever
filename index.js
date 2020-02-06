@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const mongodb = require("mongodb");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 
 const app = express();
 
@@ -12,6 +13,7 @@ mongoose.connect(
 );
 
 app.use(bodyParser.json());
+app.use(cors());
 
 async function loadData() {
   const records = await mongodb.MongoClient.connect(
